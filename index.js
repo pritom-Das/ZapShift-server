@@ -8,8 +8,13 @@ const crypto = require("crypto");
 
 const admin = require("firebase-admin");
 
-const serviceAccount = require("./zapshift-firebase-adminSDK.json");
-const { log } = require("console");
+// const serviceAccount = require("./zapshift-firebase-adminSDK.json");
+
+const decoded = Buffer.from(process.env.FB_SERVICEKEY, "base64").toString(
+  "utf8",
+);
+const serviceAccount = JSON.parse(decoded);
+// const { log } = require("console");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
